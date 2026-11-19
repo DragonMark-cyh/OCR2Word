@@ -171,13 +171,13 @@ pyinstaller-hooks-contrib
 
 ```bash
 # Build main program (main.py)
-pyinstaller -d --collect-all tkinterdnd2 main.py
+python -m PyInstaller -D --name OCR2Word --contents-directory "." --collect-all tkinterdnd2 --collect-all customtkinter --collect-all paddle --collect-all paddleocr --collect-all cv2 --hidden-import numpy --hidden-import scipy --hidden-import shapely --hidden-import pyclipper --hidden-import RapidFuzz --hidden-import lmdb --hidden-import fitz --hidden-import skimage --hidden-import PIL --hidden-import docx --hidden-import protobuf --hidden-import requests --hidden-import tqdm --hidden-import fire main.py
 
 # Build Chinese drag popup (drag.py)
-pyinstaller -d --collect-all tkinterdnd2 drag.py
+python -m PyInstaller -D --name drag--collect-all tkinterdnd2 drag.py
 
 # Build English drag popup (drag_en.py)
-pyinstaller -d --collect-all tkinterdnd2 drag_en.py
+python -m PyInstaller -D --name drag --collect-all tkinterdnd2 drag_en.py
 ```
 
 After packaging:
