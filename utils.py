@@ -137,7 +137,8 @@ def setup_logger() -> logging.Logger:
         logger.addHandler(file_handler)
 
         logger.info("日志系统初始化完成。当前日志目录: %s", os.path.dirname(log_file))
-        
+        logger.info("Logging system initialized. Current log directory: %s", os.path.dirname(log_file))
+
         # 注册程序退出时的清理动作
         atexit.register(_log_normal_exit)
         _logger_ready = True
