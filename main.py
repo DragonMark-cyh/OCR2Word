@@ -27,6 +27,7 @@ def main():
     # 记录启动上下文（带根目录，方便打包后排查“到底在哪找 models”）
     # 使用参数化 %s 而不是 f-string：防止 Windows 路径中自带的 % 触发格式化异常
     log.info("正在启动 PDF2Word 主程序... | 根目录: %s", get_base_dir())
+    log.info("Starting PDF2Word main program... | Base directory: %s", get_base_dir())
 
     try:
         # ==============================================================================
@@ -49,6 +50,7 @@ def main():
         # 首先写一条带上下文（"主程序启动失败"）的 CRITICAL 日志。
         # exc_info=True 会自动把完整的 traceback 也带进日志文件。
         log.critical("主程序启动失败", exc_info=True)
+        log.critical("Main program startup failed", exc_info=True)
         
         # 【关键】直接 raise，绝不使用 sys.exit(1)！
         # 原因：sys.exit(1) 会吞掉异常，导致 main() 内部结束，Python 解释器认为正常退出，
