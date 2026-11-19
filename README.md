@@ -161,7 +161,24 @@ pyinstaller-hooks-contrib
 
 ## 📦 Windows PyInstaller Packaging Guide
 > **⚠️ Important**: These PyInstaller commands are Windows‑only. To build binaries for macOS / Linux you must run PyInstaller on that corresponding operating system. Cross‑compiling binaries from another OS is **not supported**.
+
+> > ✅ **Recommended: Run from source code or use [WinPython official distribution](https://winpython.github.io/)**
+> This project relies heavily on libraries with complex C‑extension binaries including PaddlePaddle and OpenCV.
+> Binary packaging via PyInstaller is prone to missing DLLs, runtime failures, and extremely long build times.
 >
+> If you still choose to build standalone binaries with PyInstaller:
+> 1. You **must use `-D` / onedir directory mode**. **`--onefile` single‑file mode is strictly forbidden and will cause severe stability problems.**
+> 2. Use the complete set of provided build arguments including all `--collect‑all` and `--hidden‑import` parameters shown below.
+> 3. Packaging consumes high CPU and disk I/O resources; build process may take tens of minutes or longer, please wait patiently.
+> 4. Never rearrange, move or delete any files inside the output directory, otherwise the executable will fail to launch.
+>
+> ⚠️ Even with exact correct build parameters, runtime errors may still occur after packaging. When facing post‑build crashes, please fall back to source‑code execution or WinPython environment for debugging.
+
+> **⚠️ Important**: The provided PyInstaller commands are **Windows‑optimized and Windows‑only**.
+> While PyInstaller can in theory generate binaries on macOS and Linux when executed natively on those systems, our heavy‑weight dependency stack (PaddlePaddle, OpenCV, tkinterdnd2) leads to numerous unresolved binary‑linking, code‑signing, and runtime issues on non‑Windows platforms.
+> Binary builds for macOS / Linux are **not maintained or tested** for this project. For macOS and Linux users, please rely on source‑code execution instead.
+> Cross‑compiling binaries for a different operating system from your current OS is **not supported by PyInstaller at all**.
+
 > **Critical points**:
 > 1. `drag.py` and `drag_en.py` **must be packaged individually into separate exe files**.
 > 2. `--collect-all tkinterdnd2` is mandatory, tkinterdnd2 contains C‑extension binary resources; omitting this argument causes drag‑window runtime crash.
@@ -174,7 +191,7 @@ pyinstaller-hooks-contrib
 python -m PyInstaller -D --name OCR2Word --contents-directory "." --collect-all tkinterdnd2 --collect-all customtkinter --collect-all paddle --collect-all paddleocr --collect-all cv2 --hidden-import numpy --hidden-import scipy --hidden-import shapely --hidden-import pyclipper --hidden-import RapidFuzz --hidden-import lmdb --hidden-import fitz --hidden-import skimage --hidden-import PIL --hidden-import docx --hidden-import protobuf --hidden-import requests --hidden-import tqdm --hidden-import fire main.py
 
 # Build Chinese drag popup (drag.py)
-python -m PyInstaller -D --name drag--collect-all tkinterdnd2 drag.py
+python -m PyInstaller -D --name drag --collect-all tkinterdnd2 drag.py
 
 # Build English drag popup (drag_en.py)
 python -m PyInstaller -D --name drag --collect-all tkinterdnd2 drag_en.py
