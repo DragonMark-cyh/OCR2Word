@@ -221,4 +221,4 @@ Windows fatal crash will pop‑up Notepad with crash log snapshot.
 - GPU inference is not enabled; all computations run on CPU.
 
 ## License
-This project is licensed under **Apache‑2.0 License**, see the [`LICENSE`](LICENSE) file.
+This project is licensed under **AGPL-3.0*, see the [`LICENSE`](LICENSE) file.
