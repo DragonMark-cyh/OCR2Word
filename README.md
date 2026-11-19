@@ -119,8 +119,6 @@ protobuf==3.20.2
 pyclipper==1.4.0
 pydantic==2.14.2
 pydantic_core==2.50.2
-pyinstaller==6.10.0
-pyinstaller-hooks-contrib==2026.9
 PyMuPDF==1.24.9
 PyMuPDFb==1.24.9
 pyparsing==3.3.3
@@ -150,8 +148,8 @@ urllib3==2.8.0
 
 ### requirements-dev.txt
 ```txt
-pyinstaller
-pyinstaller-hooks-contrib
+pyinstaller==6.10.0
+pyinstaller-hooks-contrib==2026.9
 ```
 
 ## Environment Variables for custom configuration
