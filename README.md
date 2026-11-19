@@ -42,7 +42,7 @@ DragonMark-cyh/OCR2Word/
 ## Install from source
 ### 1. Clone repository
 ```bash
-git clone [https://github.com/DragonMark-cyh/OCR2Word.git](https://github.com/DragonMark-cyh/OCR2Word.git)
+git clone https://github.com/DragonMark-cyh/OCR2Word.git
 cd OCR2Word
 ```
 
@@ -160,19 +160,16 @@ pyinstaller-hooks-contrib
 - `PDF2WORD_AUTO_DOWNLOAD=0`: Disable automatic model download for offline usage. You need manually place model files into target folder.
 
 ## 📦 Windows PyInstaller Packaging Guide
-> **⚠️ Important**: These PyInstaller commands are Windows‑only. To build binaries for macOS / Linux you must run PyInstaller on that corresponding operating system. Cross‑compiling binaries from another OS is **not supported**.
-
-> > ✅ **Recommended: Run from source code or use [WinPython official distribution](https://winpython.github.io/)**
-> This project relies heavily on libraries with complex C‑extension binaries including PaddlePaddle and OpenCV.
-> Binary packaging via PyInstaller is prone to missing DLLs, runtime failures, and extremely long build times.
 >
-> If you still choose to build standalone binaries with PyInstaller:
-> 1. You **must use `-D` / onedir directory mode**. **`--onefile` single‑file mode is strictly forbidden and will cause severe stability problems.**
-> 2. Use the complete set of provided build arguments including all `--collect‑all` and `--hidden‑import` parameters shown below.
-> 3. Packaging consumes high CPU and disk I/O resources; build process may take tens of minutes or longer, please wait patiently.
-> 4. Never rearrange, move or delete any files inside the output directory, otherwise the executable will fail to launch.
+> ✅ **Recommended: Run from source code or use [WinPython official distribution](https://winpython.github.io/)**
+> If you prefer standalone executable files, you can build binary packages! A quick heads‑up: PaddlePaddle, PaddleOCR and OpenCV require `--collect-all`. This build workflow targets Windows only.
 >
-> ⚠️ Even with exact correct build parameters, runtime errors may still occur after packaging. When facing post‑build crashes, please fall back to source‑code execution or WinPython environment for debugging.
+> If you build binaries with PyInstaller:
+> 1. Stick to `-D` (onedir mode). Avoid `--onefile` — it will cause big stability issues.
+> 2. Use the full argument set we provide below, including all `--collect-all` and hidden import flags.
+> 3. Don’t shuffle, move or delete files inside the output folder, otherwise the program won’t launch.
+>
+> ⚠️ On some machines you may hit runtime failures. If things break, try running from source or WinPython.
 
 > **⚠️ Important**: The provided PyInstaller commands are **Windows‑optimized and Windows‑only**.
 > While PyInstaller can in theory generate binaries on macOS and Linux when executed natively on those systems, our heavy‑weight dependency stack (PaddlePaddle, OpenCV, tkinterdnd2) leads to numerous unresolved binary‑linking, code‑signing, and runtime issues on non‑Windows platforms.
