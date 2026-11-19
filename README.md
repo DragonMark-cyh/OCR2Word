@@ -10,7 +10,6 @@ Convert scanned PDFs and images to editable Word documents, powered by PaddleOCR
 - **Intelligent memory‑adaptive model loading**
   - RAM ≤ 8 GB: lightweight `fast_model`, single‑language (**English default**). Chinese recognition quality will be limited. Layout analysis and table recognition are disabled.
   - RAM > 8 GB: full‑featured `pro_model`. Enable layout analysis + **Chinese‑English dual‑model arbitration**. Automatically select optimal OCR output by confidence and text character statistics for mixed Chinese‑English content.
-- Bilingual UI: English / 中文. Persist language setting by empty marker file (`en` / `zh`), no JSON config file.
 - Two file import methods: system file browser or standalone drag‑and‑drop popup window.
 - Smart PDF processing: Reads native embedded text layer directly for digital PDFs. OCR inference only triggers for scanned‑only pages to save waiting time.
 - Auto‑download PaddleOCR inference models on first‑run. Offline deployment is supported.
@@ -188,15 +187,12 @@ python -m PyInstaller -D --name OCR2Word --contents-directory "." --collect-all 
 # Build Chinese drag popup (drag.py)
 python -m PyInstaller -D --name drag --collect-all tkinterdnd2 drag.py
 
-# Build English drag popup (drag_en.py)
-python -m PyInstaller -D --name drag --collect-all tkinterdnd2 drag_en.py
 ```
 
 After packaging:
 1. Locate output files from each generated `dist/` folder.
-2. Gather `main.exe`, `drag.exe`, `drag_en.exe` and place them into one flat output directory.
-3. Keep the empty marker file `en` inside this folder.
-4. `models/` and `logs/` directories will be auto‑created on first program launch.
+2. Gather `main.exe`, `drag.exe`, and place them into one flat output directory.
+3. `models/` and `logs/` directories will be auto‑created on first program launch.
 
 > Production release tip: Remove `-d` flag for final release builds to strip debug symbols.
 
@@ -206,7 +202,7 @@ After packaging:
 3. **> 8 GB RAM**: Pro‑model mode is activated. Layout analysis, table parsing and Chinese‑English dual‑model arbitration become available.
 4. On Windows, table recognition function may be automatically disabled when user home path contains special / non‑ASCII characters, to prevent underlying PPStructure C‑level crash. Text OCR feature keeps working normally.
 5. Drag‑drop popup window depends on `tkinterdnd2`. Linux users need to install system package `tkdnd`.
-6. `drag.exe` / `drag_en.exe` must reside same folder as main executable, otherwise main GUI cannot launch drag‑and‑drop window.
+6. `drag.exe` must reside same folder as main executable, otherwise main GUI cannot launch drag‑and‑drop window.
 
 ## Language switching
 Use dropdown menu at top‑right corner inside GUI. Program will create / delete empty marker file (`en` or `zh`) under project root folder to remember your language choice.
